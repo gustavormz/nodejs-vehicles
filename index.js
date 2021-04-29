@@ -1,18 +1,21 @@
-import utils from './lib/utils';
-import {
+const {
+    constructCustomErrorByType
+} = require('./lib/utils');
+const {
     processGet,
     processPut
-} from './lib/request';
-import {
+} = require('./lib/request');
+const {
     buildErrorResponse,
     buildSuccessResponse
-} from './lib/response';
+} = require('./lib/response');
 
 const processEvent = async ({
     httpMethod,
     body,
     pathParameters,
-    resource
+    resource,
+    queryStringParameters
 }) => {
     try {
         let result = null;
@@ -48,6 +51,4 @@ const processEvent = async ({
     }
 };
 
-export async function handler (event) {
-    return await processEvent(event);
-}
+exports.handler = async event => await processEvent(event);
